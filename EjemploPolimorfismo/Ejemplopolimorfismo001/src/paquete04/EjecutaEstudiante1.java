@@ -1,21 +1,15 @@
 
-package paquete03;
+package paquete04;
 
-import java.util.Locale;
 import java.util.Scanner;
 
-/**
- *
- * @author reroes
- */
-public class EjecutaEstudiante {
+public class EjecutaEstudiante1 {
 
     public static void main(String[] args) {
 
         // Se declaran variables
         // a.  Declarar Variables
         Scanner entrada = new Scanner(System.in);
-        entrada.useLocale(Locale.US);
         String nombresEst;
         String apellidosEst;
         String identificacionEst;
@@ -26,11 +20,14 @@ public class EjecutaEstudiante {
         int numeroAsigs;
         int tipoEstudiante;
         String continuar;
+        int contador;
+        Estudiante [] estudiantes = new Estudiante[4];
+        
 
-        // b. Incio ciclo repetitivo que permite generar objetos de tipo
-        // EstudiantePresencial y EstudianteDistancia hasta que el usaurio
-        // decida salir del proceso.
-        do {
+        // Incio ciclo repetitivo que permite generar 10 objetos de tipo
+        // EstudiantePresencial y EstudianteDistancia 
+        contador = 0;
+        while(contador<4){
             // Se imprime mensaje en pantalla para solicitar
             // el tipo de estudiante que se desea ingresar
             System.out.println("Tipo de Estudiante a ingresar\n"
@@ -72,32 +69,16 @@ public class EjecutaEstudiante {
                 estudianteP.establecerEdadEstudiante(edadEst);
                 estudianteP.establecerNumeroCreditos(numeroCreds);
                 estudianteP.establecerCostoCredito(costoCred);
-
-                // Luego que se ha ingresado los datos, se hace uso del método
-                // abtracto <calcularMatricula> para obtener 
-                // el costo de la Matricula Presencial para el objeto tipo 
+                // Se agrega al arreglo estudiantes un objeto de tipo
                 // EstudiantePresencial
-                estudianteP.calcularMatricula();
-
-                // se hace uso de los métodos obtener del objeto para presentar
-                // los valores que se necesite en pantalla
-                // Imprimir
-                System.out.printf("Datos Estudiante Presencial\n"
-                        + "Nombres: %s\n"
-                        + "Apellidos: %s\n"
-                        + "Identificación: %s\n"
-                        + "Edad: %d\n"
-                        + "Costo Matricula: %.2f\n",
-                        estudianteP.obtenerNombresEstudiante(),
-                        estudianteP.obtenerApellidoEstudiante(),
-                        estudianteP.obtenerIdentificacionEstudiante(),
-                        estudianteP.obtenerEdadEstudiante(),
-                        estudianteP.obtenerMatricula());
+                estudiantes[contador] = estudianteP;
+                
+                
             } else {
-                // Si el usuario ingresa un número igual a 2 para 
+                // Si el usuario ingresa un número diferente del valor 1 para 
                 // tipoEstudiante se procede a crear los procesos necesarios para 
                 // crear un objeto de tipo EstudianteDistancia
-                if (tipoEstudiante == 2) {
+                
                     // Declarar,crear e iniciar objeto tipo EstudianteDistancia
                     EstudianteDistancia estudianteD = new EstudianteDistancia();
                     // Solicitar ingreso de valores para variables 
@@ -116,46 +97,41 @@ public class EjecutaEstudiante {
                     estudianteD.establecerEdadEstudiante(edadEst);
                     estudianteD.establecerNumeroAsginaturas(numeroAsigs);
                     estudianteD.establecerCostoAsignatura(costoAsig);
-
-                    // Luego que se ha ingresado los datos, se hace uso del método
-                    // abtracto <calcularMatricula> para obtener 
-                    // el costo de la Matricula Distancia para el objeto tipo 
+                    
+                    // Se agrega al arreglo estudiantes un objeto de tipo
                     // EstudianteDistancia
-                    estudianteD.calcularMatricula();
-
-                    // se hace uso de los métodos obtener del objeto para presentar
-                    // los valores que se necesite en pantalla
-                    System.out.printf("Datos Estudiante Distancia\n"
-                            + "Nombres: %s\n"
-                            + "Apellidos: %s\n"
-                            + "Identificación: %s\n"
-                            + "Edad: %d\n"
-                            + "Costo Matricula: %.2f\n",
-                            estudianteD.obtenerNombresEstudiante(),
-                            estudianteD.obtenerApellidoEstudiante(),
-                            estudianteD.obtenerIdentificacionEstudiante(),
-                            estudianteD.obtenerEdadEstudiante(),
-                            estudianteD.obtenerMatricula());
-                } else {
-                    System.out.println("Opción fuera de rango");
-
-                }
+                    estudiantes[contador] = estudianteD;
+                    
+                                                      
             }
+            
+            contador = contador + 1;
+        }
+        
+        // Luego de crear y almancenar los objetos EstudiantePresencial
+        // y EstudianteDistancia, se procede a usar un ciclo repetitivo
+        // para recorrer el arreglo estudiantes, que permitirá:
+        // 1. Llamar al método abstracto calcularMatricula, de acuedo a las
+        // características propias de cada objeto.
+        // 2. Presentar en pantalla los valores que se necesite.
 
-            entrada.nextLine();
-            // Se pregunta si se desea ingresar más estudiante
-            System.out.println("Desea ingresar más estudiante. Digite la "
-                    + "letra S para continuar o digite la letra N para salir "
-                    + "del proceso");
-
-            // se captura el valor ingresado por el usuario para la variable 
-            // continuar
-            continuar = entrada.nextLine();
-            // se pregunta si el valor continuar es igual al valor "S", se sigue en 
-            // ciclo repetitivo; si el valor es distinto de "S", se sale del ciclo
-            // repetitivo
-        } while (continuar.equals("S"));
-
+        for (int i = 0; i < 4; i++) {
+            // 1.  
+            estudiantes[i].calcularMatricula();
+            // en el punto 1, estudiantes[i] representa un objeto de tipo 
+            // EstudiantePresencial o EstudianteDistancia; en cualquiera de los
+            // dos casos, para dichos objetos se llama al método calcularMatricula()
+            // de acuerdo al tipo de dato. Se recuerda que obtenerMatricula, es
+            // un método abstracto de la clase abstracta Estudiante y que fue implementado
+            // de forma obligatoria en cada clase hija (EstudiantePresencial y
+            // EstudianteDistancia)
+            
+            // 2. se hace uso de los métodos obtener del objeto para presentar
+            // los valores que se necesite en pantalla
+            // Imprimir:
+            System.out.printf("%s\n",estudiantes[i]);
+            
+        }
     }
 
 }

@@ -127,7 +127,7 @@ public class EjecutaEstudiante {
             // 2. se hace uso de los métodos obtener del objeto para presentar
             // los valores que se necesite en pantalla
             // Imprimir:
-            System.out.printf("Datos Estudiante\n"
+            System.out.printf("\nDatos Estudiante\n"
                         + "Nombres: %s\n"
                         + "Apellidos: %s\n"
                         + "Identificación: %s\n"
