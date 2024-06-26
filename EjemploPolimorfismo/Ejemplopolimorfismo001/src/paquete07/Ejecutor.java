@@ -32,8 +32,6 @@ public class Ejecutor {
         // inicio de la solución
         ArrayList<Figura> figuras = new ArrayList<>();
         
-        
-        
         // proceso para comprobar el polimorfismo
         for (int i = 0; i < figuras.size(); i++) {
             // 1.  
